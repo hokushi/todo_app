@@ -9,7 +9,7 @@ const index = () => {
 
   const addTextToTODO = () => {
     // todos ⇒ ["皿洗い", "洗濯", "掃除"]
-    // ...todos ⇒ "皿洗い", "洗濯", "掃除"
+    // ...todos ⇒ "皿洗い", "洗濯", "掃除"!
     const newTodos = [...todos, text]
     setTodos(newTodos)
   }
