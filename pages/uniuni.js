@@ -17,7 +17,7 @@ const uniuni = () => {
 
     return (
         <>
-            <p>買うプランを数字で記入してください!!</p>
+            <p>買うプランを数字で記入してください!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
             <p className=' text-gray-500'>（梅は１、竹は２、松は３）</p>
             <div className="relative w-40">
                 <input onChange={(event) => setnumber(event.target.value)} type="number" className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
