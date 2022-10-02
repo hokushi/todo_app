@@ -2,7 +2,7 @@ import React from 'react'
 
 const hennsyuu = () => {
   return (
-    <div>hennsyuu</div>
+    <div>ヒバゴンとの愛の巣❤️</div>
   )
 }
 
