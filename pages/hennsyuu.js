@@ -4,14 +4,15 @@ import { useRouter } from 'next/router'
 const hennsyuu = () => {
   const router = useRouter()
   const [text, setText] = useState("");
+  const todo_id = router.query.todo_id
 
   useEffect(() => {
-    const x = localStorage.getItem('tinpo')
-    setText(x)
+    const existing_todo = localStorage.getItem(todo_id)
+    setText(existing_todo)
   }, [])
 
   const saveTextInLocalStorage = () => {
-    localStorage.setItem('tinpo', text)
+    localStorage.setItem(todo_id, text)
   }
   
 

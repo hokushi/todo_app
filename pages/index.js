@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { v4 as uuidv4 } from 'uuid';
 // todos.map((todo)=>())
 
 const index = () => {
@@ -12,25 +13,38 @@ const index = () => {
   const addTextToTODO = () => {
     // todos ⇒ ["皿洗い", "洗濯", "掃除"]
     // ...todos ⇒ "皿洗い", "洗濯", "掃除"!
-    const newTodos = [...todos, text]
+    const id = uuidv4()
+    const newTodo = { id: id, title: text }
+    const newTodos = [...todos, newTodo]
     setTodos(newTodos)
+    localStorage.setItem(id, text) // localStorage.setItem("tinpo", text) (もとこれ)
   }
-
-  const minusTextToTODO = (x) => {
+  
+  const minusTextToTODO = (target_id) => {
     /**  */
-    const newTodos = todos.filter((todo) => todo !== x)
+    const newTodos = todos.filter((todo) => todo.id !== target_id) 
+    /* 既存知識
+    let tmp = []
+    newTodos.map((todo, index) => {
+      tmp.push({ id: index + 1, title: todo.title })
+    })
+    setTodos(tmp)
+    */
     setTodos(newTodos)
-  }
-
-  const saveTextInLocalStorage = () => {
-    localStorage.setItem('tinpo', text)
+    localStorage.removeItem(target_id);
   }
 
   useEffect(() => {
     // const x = ["task1", "task2", "task3"] (これはlocalStorageから取得した配列)
     // setTodos(x)
-    const x = localStorage.getItem('tinpo')
-    setTodos([x])
+    let tmp = []
+    for (let i = 0, length = localStorage.length; i < length; i++) {
+      const id = localStorage.key(i);
+      const title = localStorage.getItem(id);
+      const todo = {id: id, title: title}
+      tmp.push(todo);
+    }
+    setTodos(tmp)
   }, [])
 
   return (
@@ -41,7 +55,7 @@ const index = () => {
       <p>{JSON.stringify(todos)}</p>
       <div className='flex justify-center m-4'>
         <input type="text" onChange={(event) => setText(event.target.value)} className="rounded-l-lg p-0 border-t mr-0  my-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="(例：宿題をする)" />
-        <button onClick={()=>{addTextToTODO();saveTextInLocalStorage()}} className="px-4 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">保存</button>
+        <button onClick={()=>{addTextToTODO()}} className="px-4 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">保存</button>
       </div>
 
       <div className="mx-80 overflow-x-auto relative">
@@ -60,16 +74,23 @@ const index = () => {
             </tr>
           </thead>
           <tbody >
-            {todos.map((a,index) => (
+            {todos.map((todo,index) => (
               <tr className=" bg-yellow-400 dark:bg-gray-800">
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {a}
+                  {todo.title}
                 </th>
                 <td className="py-4 px-6 border-l-4">
-                  <button onClick={() => router.push('/hennsyuu')} className='flex  p-2 ml-0 bg-gray-800'>編集する</button>
+                  <button 
+                    onClick={() => {
+                      router.push({
+                        pathname: "/hennsyuu",
+                        query: { todo_id: todo.id }
+                      })
+                    }} 
+                    className='flex  p-2 ml-0 bg-gray-800'>編集する</button>
                 </td>
                 <td className="py-4 px-6 border-l-4">
-                  <button onClick={()=>{minusTextToTODO(a)}} className='flex  p-2 ml-0 bg-gray-800'>{index+1}番を削除する</button>
+                  <button onClick={()=>{minusTextToTODO(todo.id)}} className='flex  p-2 ml-0 bg-gray-800'>{index+1}番を削除する</button>
                 </td>
               </tr>
             ))}
@@ -84,6 +105,5 @@ const index = () => {
 // pはパディング、mはマージン
 
 // 方向は、tは上、rは右、bは下、lは左。xは左右、yは上下
-export{}
 export default index
 
