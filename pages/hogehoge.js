@@ -97,7 +97,7 @@ const hogehoge = () => {
                   {definetime[index]}
                 </td>
                 <td className="py-2 px-6">
-                  <button onClick={() => router.push('/hennsyuu')} className='bg-blue-400 px-2 py-2 text-white rounded-lg'>編集</button>
+                  <button className='bg-blue-400 px-2 py-2 text-white rounded-lg'>編集</button>
                 </td>
                 <td className="py-2 px-6">
                   <button onClick={() => { minustodo(a) && minustime(a)}} className='bg-blue-400 px-2 py-2 text-white rounded-lg'>削除</button>
