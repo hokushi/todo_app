@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { v4 as uuidv4 } from 'uuid';
+import Link from 'next/link'
 // todos.map((todo)=>())
 
 const index = () => {
@@ -80,14 +81,9 @@ const index = () => {
                   {todo.title}
                 </th>
                 <td className="py-4 px-6 border-l-4">
-                  <button 
-                    onClick={() => {
-                      router.push({
-                        pathname: "/hennsyuu",
-                        query: { todo_id: todo.id }
-                      })
-                    }} 
-                    className='flex  p-2 ml-0 bg-gray-800'>編集する</button>
+                <Link href={`/${todo.id}`}>
+                  <button className='flex  p-2 ml-0 bg-gray-800'>編集する</button>
+                </Link>
                 </td>
                 <td className="py-4 px-6 border-l-4">
                   <button onClick={()=>{minusTextToTODO(todo.id)}} className='flex  p-2 ml-0 bg-gray-800'>{index+1}番を削除する</button>
