@@ -40,10 +40,11 @@ const Home = () => {
       </div>
       <div className='flex justify-center m-4'>
         <input type="text" onChange={(event) => setTitle(event.target.value)} className="rounded-l-lg p-0 border-t mr-0  my-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="(例：宿題をする)" />
-        <button onClick={() => { addTodo() }} className="px-4 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">
+        <button onClick={()=>{addTodo()}} className="px-4 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r"> 
           保存
         </button>
       </div>
+      
 
       <div className="mx-80 overflow-x-auto relative">
         <table className=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
