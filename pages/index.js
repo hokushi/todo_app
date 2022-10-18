@@ -28,7 +28,7 @@ const Home = () => {
   }
 
   const removeTodo = (target_id) => {
-    const newTodos = todos.filter((todo) => todo.id !== target_id) //todo.idってなんだ
+    const newTodos = todos.filter((todo) => todo.id !== target_id)
     setTodos(newTodos)
     localStorage.removeItem(target_id);
   }
